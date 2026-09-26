@@ -242,7 +242,7 @@ export default function AdminInterviewerDashboard({
             </span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
             <a
               href={EVENT_DETAILS.lumaUrl}
               target="_blank"
@@ -414,7 +414,7 @@ export default function AdminInterviewerDashboard({
                       </h4>
                     </div>
 
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-2 mt-2 sm:mt-0">
                       <span className="rounded-full bg-soil text-cream px-3 py-1 text-xs font-mono font-bold">
                         Rank #{selectedCandidate.rank}
                       </span>
@@ -438,7 +438,7 @@ export default function AdminInterviewerDashboard({
                             className="p-3 bg-cream/20 hover:bg-cream/50 transition-colors flex items-center justify-between text-xs"
                           >
                             <div>
-                              <div className="flex items-center gap-2">
+                              <div className="flex flex-wrap items-center gap-1 sm:gap-2">
                                 <span className="font-bold text-soil font-sans">
                                   {att.studentName}
                                 </span>

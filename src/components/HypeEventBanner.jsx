@@ -160,7 +160,7 @@ export default function HypeEventBanner({
 
                 {/* Candidate Key Card */}
                 <div className="rounded-xl bg-soil p-4 border border-white/10 font-mono space-y-2">
-                  <div className="flex justify-between text-[0.7rem] text-cream/50 uppercase">
+                  <div className="flex flex-col sm:flex-row flex-wrap sm:justify-between text-[0.7rem] text-cream/50 uppercase gap-1">
                     <span>YOUR RECRUITMENT KEY:</span>
                     <span className="text-blush font-bold">
                       +100 XP / VERIFIED ATTENDEE
@@ -188,7 +188,7 @@ export default function HypeEventBanner({
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between text-[0.7rem] font-mono text-cream/50 pt-1">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-[0.7rem] font-mono text-cream/50 pt-1 gap-1">
                   <span>DEDUPLICATION ENABLED</span>
                   <span>BENNETT ENROLLMENT CHECK</span>
                 </div>

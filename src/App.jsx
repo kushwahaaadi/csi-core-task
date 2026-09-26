@@ -127,10 +127,11 @@ export default function App() {
 
               <button
                 onClick={() => setPrRegisterModalOpen(true)}
-                className="inline-flex items-center justify-center gap-1.5 rounded-full px-4 sm:px-5 py-2 text-[0.82rem] font-bold uppercase tracking-wider transition-all duration-200 bg-blush text-soil hover:bg-white hover:shadow-lg active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-1.5 rounded-full px-3 sm:px-5 py-1.5 sm:py-2 text-[0.65rem] sm:text-[0.82rem] font-bold uppercase tracking-wider transition-all duration-200 bg-blush text-soil hover:bg-white hover:shadow-lg active:scale-[0.98] whitespace-nowrap"
               >
                 <UserPlus size={15} />
-                <span>Verify Attendee</span>
+                <span className="hidden sm:inline">Verify Attendee</span>
+                <span className="inline sm:hidden">Verify</span>
               </button>
             </div>
           </div>
@@ -224,15 +225,15 @@ export default function App() {
               CSI BENNETT — PR & MANAGEMENT RECRUITMENT 2026
             </div>
 
-            <h1 className="font-display text-[clamp(2.2rem,7vw,7rem)] font-bold uppercase leading-[1.1] tracking-[0.02em] text-cream">
+            <h1 className="font-display text-[clamp(1.8rem,9vw,7rem)] font-bold uppercase leading-[1.1] tracking-[0.02em] text-cream">
               <span className="block overflow-hidden">
                 <span className="block transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                  <span className="whitespace-nowrap">Not your average</span>
+                  <span className="whitespace-normal sm:whitespace-nowrap">Not your average</span>
                 </span>
               </span>
               <span className="block overflow-hidden mt-1 sm:mt-2">
                 <span className="block transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                  <span className="whitespace-nowrap text-cream">
+                  <span className="whitespace-normal sm:whitespace-nowrap text-cream">
                     interview task
                   </span>
                 </span>
@@ -248,10 +249,10 @@ export default function App() {
             </div>
 
             {/* CTAs */}
-            <div className="mt-8 flex w-full flex-col items-center justify-center gap-3 sm:flex-row font-medium">
+            <div className="mt-8 flex w-full flex-col items-center justify-center gap-3 sm:flex-row font-medium max-w-[100vw] overflow-hidden px-4">
               <button
                 onClick={() => setPrRegisterModalOpen(true)}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-blush px-7 py-3 text-[0.86rem] font-bold uppercase tracking-wider text-soil transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-white hover:scale-105 active:scale-[0.98] shadow-xl"
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-blush px-7 py-3 text-[0.86rem] font-bold uppercase tracking-wider text-soil transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-white hover:scale-105 active:scale-[0.98] shadow-xl"
               >
                 <Sparkles size={16} />
                 Verify Attendee (+100 XP)
@@ -259,7 +260,7 @@ export default function App() {
 
               <a
                 href="#hype4"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-cream px-6 py-3 text-[0.86rem] font-semibold uppercase tracking-wider text-soil transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-white active:scale-[0.98]"
+                className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-cream px-6 py-3 text-[0.86rem] font-semibold uppercase tracking-wider text-soil transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] hover:bg-white active:scale-[0.98]"
               >
                 <GitBranch size={16} className="text-blush" />
                 Inspect HYPE 4.0 Event
@@ -267,14 +268,14 @@ export default function App() {
             </div>
 
             {/* Candidate Key Card */}
-            <div className="mt-8 inline-flex items-center gap-2.5 rounded-xl bg-white/10 backdrop-blur-md px-4 py-2 text-xs font-mono border border-white/10 text-cream/90">
+            <div className="mt-8 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-2.5 rounded-xl bg-white/10 backdrop-blur-md px-4 py-3 sm:py-2 text-xs font-mono border border-white/10 text-cream/90 max-w-full text-center">
               <span className="text-cream/50 uppercase">
                 YOUR RECRUITMENT KEY:
               </span>
-              <span className="font-bold text-blush tracking-wider">
+              <span className="font-bold text-blush tracking-wider break-all">
                 {activeJuniorEnrollment}
               </span>
-              <span className="text-cream/30">|</span>
+              <span className="text-cream/30 hidden sm:inline">|</span>
               <button
                 onClick={() => {
                   const url = `${window.location.origin}/?ref=${activeJuniorEnrollment}`;

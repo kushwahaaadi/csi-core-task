@@ -283,7 +283,7 @@ export default function LeaderboardSection({
                 </p>
               </div>
 
-              <form onSubmit={handleLookupSubmit} className="flex gap-2">
+              <form onSubmit={handleLookupSubmit} className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
                   placeholder="e.g. S24CSEU1214"
@@ -304,7 +304,7 @@ export default function LeaderboardSection({
             <div className="lg:col-span-6">
               {lookupResult && !lookupResult.notFound ? (
                 <div className="rounded-2xl bg-soil text-cream p-5 border border-blush/40 shadow-md space-y-3 font-mono">
-                  <div className="flex justify-between items-center border-b border-cream/15 pb-2">
+                  <div className="flex flex-col sm:flex-row justify-between sm:items-center border-b border-cream/15 pb-2 gap-2">
                     <span className="text-xs text-blush font-bold">
                       CANDIDATE INTERVIEW PROFILE
                     </span>
@@ -337,7 +337,7 @@ export default function LeaderboardSection({
                     <span className="text-[0.68rem] text-cream/50 uppercase block mb-1">
                       Your Direct Recruitment Share Link:
                     </span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                       <input
                         type="text"
                         readOnly

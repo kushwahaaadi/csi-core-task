@@ -175,11 +175,11 @@ export default function PRRegisterModal({
               <Sparkles size={22} className="text-soil" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="text-[0.68rem] font-mono text-blush uppercase tracking-wider font-bold">
+              <div className="flex flex-col xl:flex-row items-start xl:items-center gap-1 xl:gap-2">
+                <span className="text-[0.68rem] font-mono text-blush uppercase tracking-wider font-bold leading-tight">
                   PR & Management Interview Task
                 </span>
-                <span className="text-[0.65rem] rounded-full bg-soil px-2 py-0.2 text-cream font-mono">
+                <span className="text-[0.65rem] rounded-full bg-soil px-2 py-0.5 text-cream font-mono">
                   +100 XP / VERIFIED ATTENDEE
                 </span>
               </div>

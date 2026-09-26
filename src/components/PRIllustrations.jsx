@@ -303,7 +303,7 @@ export function ReferralKeyCard({
       {/* Background Tech Circuit line */}
       <div className="absolute right-0 top-0 bottom-0 w-32 bg-radial from-blush/20 to-transparent pointer-events-none" />
 
-      <div className="flex items-center justify-between border-b border-cream/15 pb-3">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-cream/15 pb-3 gap-2">
         <div className="flex items-center gap-2">
           <div className="h-6 w-6 rounded-full bg-blush flex items-center justify-center text-soil font-black text-xs">
             BU
@@ -326,9 +326,9 @@ export function ReferralKeyCard({
         </p>
       </div>
 
-      <div className="flex items-center justify-between text-[0.72rem] text-cream/60 font-mono pt-1">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between text-[0.72rem] text-cream/60 font-mono pt-1 gap-1">
         <span>REWARD: +100 XP / VERIFIED ATTENDEE</span>
-        <span className="text-cream">BENNETT UNIV</span>
+        <span className="text-cream hidden sm:inline">BENNETT UNIV</span>
       </div>
     </div>
   );
