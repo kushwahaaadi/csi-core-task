@@ -14,7 +14,7 @@ import { formatEnrollment } from "../lib/validation";
 
 export default function PRHero({
   onOpenRegister,
-  defaultEnrollment = "S24CSEU1214",
+  defaultEnrollment = "",
 }) {
   const [copied, setCopied] = useState(false);
 

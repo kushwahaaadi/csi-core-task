@@ -23,7 +23,7 @@ export default function PRRegisterModal({
 }) {
   const [juniorName, setJuniorName] = useState("");
   const [juniorEnrollment, setJuniorEnrollment] = useState(
-    defaultJuniorEnrollment || "S24CSEU1214",
+    defaultJuniorEnrollment || "",
   );
 
   // Attendee state
@@ -233,21 +233,9 @@ export default function PRRegisterModal({
                     <UserCheck size={14} className="text-blush" />
                     1. Your Information (PR Candidate)
                   </span>
-                  <button
-                    type="button"
-                    onClick={copyReferralKey}
-                    className="text-[0.7rem] font-mono text-soil/60 hover:text-blush flex items-center gap-1 transition-colors"
-                  >
-                    {copiedKey ? (
-                      <Check size={12} className="text-emerald-500" />
-                    ) : (
-                      <Copy size={12} />
-                    )}
-                    {copiedKey ? "Copied Key!" : "Copy Recruitment Key"}
-                  </button>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                   <div>
                     <label className="block text-[0.72rem] font-semibold uppercase tracking-wider text-soil/70 mb-1">
                       Your Full Name *
@@ -260,33 +248,6 @@ export default function PRRegisterModal({
                       onChange={(e) => setJuniorName(e.target.value)}
                       className="w-full rounded-xl border border-soil/20 bg-cream/50 px-3.5 py-2 text-sm text-soil focus:border-blush focus:outline-none focus:ring-2 focus:ring-blush/20"
                     />
-                  </div>
-
-                  <div>
-                    <label className="block text-[0.72rem] font-semibold uppercase tracking-wider text-soil/70 mb-1">
-                      Your Recruitment Key (Bennett Enrollment No.) *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. S24CSEU1214"
-                      value={juniorEnrollment}
-                      onChange={(e) =>
-                        setJuniorEnrollment(e.target.value.toUpperCase())
-                      }
-                      className="w-full rounded-xl border border-soil/20 bg-cream/50 px-3.5 py-2 text-sm font-mono tracking-wider font-bold text-soil focus:border-blush focus:outline-none focus:ring-2 focus:ring-blush/20"
-                    />
-                    <div className="mt-1 flex items-center justify-between text-[0.65rem] font-mono">
-                      <span
-                        className={
-                          juniorVal.isValid
-                            ? "text-emerald-600 font-semibold"
-                            : "text-amber-600"
-                        }
-                      >
-                        {juniorVal.message || "Example: S24CSEU1214"}
-                      </span>
-                    </div>
                   </div>
                 </div>
               </div>

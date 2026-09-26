@@ -29,9 +29,9 @@ export default function App() {
   const [supabaseModalOpen, setSupabaseModalOpen] = useState(false);
   const [adminDashboardOpen, setAdminDashboardOpen] = useState(false);
 
-  // Default active candidate referral key (defaults to user's S24CSEU1214)
+  // Default active candidate referral key
   const [activeJuniorEnrollment, setActiveJuniorEnrollment] =
-    useState("S24CSEU1214");
+    useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);

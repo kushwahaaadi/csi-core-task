@@ -18,7 +18,7 @@ import { formatEnrollment } from "../lib/validation";
 
 export default function HypeEventBanner({
   onOpenRegister,
-  candidateEnrollment = "S24CSEU1214",
+  candidateEnrollment = "",
 }) {
   const [copied, setCopied] = useState(false);
 

@@ -30,7 +30,7 @@ export default function LeaderboardSection({
   const [leaderboard, setLeaderboard] = useState([]);
   const [recentActivities, setRecentActivities] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [quickLookup, setQuickLookup] = useState("S24CSEU1214");
+  const [quickLookup, setQuickLookup] = useState("");
   const [lookupResult, setLookupResult] = useState(null);
   const [copiedLink, setCopiedLink] = useState(false);
   const [loading, setLoading] = useState(true);

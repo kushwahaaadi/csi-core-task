@@ -293,7 +293,7 @@ export function PodiumIllustration({ className = "w-full h-auto" }) {
 }
 
 export function ReferralKeyCard({
-  enrollment = "S24CSEU1214",
+  enrollment = "",
   className = "w-full max-w-sm",
 }) {
   return (
