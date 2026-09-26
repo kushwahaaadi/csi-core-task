@@ -1,17 +1,83 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 const SPHERE_ITEMS = [
-  { id: 1, title: 'CSI BENNETT', desc: 'The Core Chapter Identity', img: '/csi-logo.png', type: 'logo' },
-  { id: 2, title: 'REACH', desc: 'Turn conversations into campus participation.', img: 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?auto=format&fit=crop&w=400&q=80', type: 'image' },
-  { id: 3, title: 'CREATE', desc: 'Build ideas people remember.', img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80', type: 'image' },
-  { id: 4, title: 'CONNECT', desc: 'Bring students, teams and opportunities together.', img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&q=80', type: 'image' },
-  { id: 5, title: 'EXECUTE', desc: 'Turn plans into outcomes.', img: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80', type: 'image' },
-  { id: 6, title: 'LEAD', desc: 'Move the team when it matters.', img: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=400&q=80', type: 'image' },
-  { id: 7, title: 'DELIVER', desc: 'Finish what you start.', img: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80', type: 'image' },
-  { id: 8, title: 'TECH', desc: 'Code and Digital Architecture.', img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80', type: 'image' },
-  { id: 9, title: 'EVENTS', desc: 'HYPE 4.0 and Beyond.', img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=400&q=80', type: 'image' },
-  { id: 10, title: 'COMMUNITY', desc: 'The People Who Make It Happen.', img: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80', type: 'image' },
-  { id: 11, title: 'PROJECTS', desc: 'Real-world impact.', img: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80', type: 'image' }
+  {
+    id: 1,
+    title: "CSI BENNETT",
+    desc: "The Core Chapter Identity",
+    img: "/csi-logo.png",
+    type: "logo",
+  },
+  {
+    id: 2,
+    title: "REACH",
+    desc: "Turn conversations into campus participation.",
+    img: "https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?auto=format&fit=crop&w=400&q=80",
+    type: "image",
+  },
+  {
+    id: 3,
+    title: "CREATE",
+    desc: "Build ideas people remember.",
+    img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80",
+    type: "image",
+  },
+  {
+    id: 4,
+    title: "CONNECT",
+    desc: "Bring students, teams and opportunities together.",
+    img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&q=80",
+    type: "image",
+  },
+  {
+    id: 5,
+    title: "EXECUTE",
+    desc: "Turn plans into outcomes.",
+    img: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=400&q=80",
+    type: "image",
+  },
+  {
+    id: 6,
+    title: "LEAD",
+    desc: "Move the team when it matters.",
+    img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=400&q=80",
+    type: "image",
+  },
+  {
+    id: 7,
+    title: "DELIVER",
+    desc: "Finish what you start.",
+    img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80",
+    type: "image",
+  },
+  {
+    id: 8,
+    title: "TECH",
+    desc: "Code and Digital Architecture.",
+    img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=400&q=80",
+    type: "image",
+  },
+  {
+    id: 9,
+    title: "EVENTS",
+    desc: "HYPE 4.0 and Beyond.",
+    img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=400&q=80",
+    type: "image",
+  },
+  {
+    id: 10,
+    title: "COMMUNITY",
+    desc: "The People Who Make It Happen.",
+    img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80",
+    type: "image",
+  },
+  {
+    id: 11,
+    title: "PROJECTS",
+    desc: "Real-world impact.",
+    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=400&q=80",
+    type: "image",
+  },
 ];
 
 export default function InteractiveSphere({ onSelectNode }) {
@@ -115,7 +181,7 @@ export default function InteractiveSphere({ onSelectNode }) {
             zIndex,
             isFront: z2 > 0.1,
           };
-        })
+        }),
       );
 
       animationId = requestAnimationFrame(tick);
@@ -175,14 +241,14 @@ export default function InteractiveSphere({ onSelectNode }) {
     <div
       ref={containerRef}
       className={`relative cursor-grab select-none active:cursor-grabbing ${
-        isDragging ? 'cursor-grabbing' : ''
+        isDragging ? "cursor-grabbing" : ""
       }`}
       style={{
-        width: '540px',
-        height: '540px',
-        maxWidth: '92vw',
-        maxHeight: '92vw',
-        perspective: '1000px',
+        width: "540px",
+        height: "540px",
+        maxWidth: "92vw",
+        maxHeight: "92vw",
+        perspective: "1000px",
       }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
@@ -220,15 +286,15 @@ export default function InteractiveSphere({ onSelectNode }) {
           >
             <div
               className={`relative h-full w-full overflow-hidden rounded-full border-2 ${
-                node.type === 'logo'
-                  ? 'border-blush bg-soil/95 shadow-[0_0_15px_rgba(242,118,94,0.4)]'
-                  : 'border-white/40 shadow-lg bg-soil/20 backdrop-blur-xs'
+                node.type === "logo"
+                  ? "border-blush bg-soil/95 shadow-[0_0_15px_rgba(242,118,94,0.4)]"
+                  : "border-white/40 shadow-lg bg-soil/20 backdrop-blur-xs"
               }`}
             >
               <img
                 alt={node.title}
                 className={`h-full w-full object-cover transition-transform duration-300 group-hover:scale-110 ${
-                  node.type === 'logo' ? 'p-1.5' : ''
+                  node.type === "logo" ? "p-1.5" : ""
                 }`}
                 draggable="false"
                 src={node.img}
@@ -238,8 +304,14 @@ export default function InteractiveSphere({ onSelectNode }) {
 
             {/* Micro tooltip on hover */}
             <div className="pointer-events-none absolute left-1/2 -top-12 -translate-x-1/2 flex flex-col items-center justify-center whitespace-nowrap rounded-md bg-soil px-3 py-1.5 text-cream shadow-xl opacity-0 transition-opacity duration-200 group-hover:opacity-100 z-50 border border-white/10">
-              <span className="text-[0.72rem] font-bold uppercase tracking-wider">{node.title}</span>
-              {node.desc && <span className="text-[0.62rem] font-sans opacity-80 mt-0.5">{node.desc}</span>}
+              <span className="text-[0.72rem] font-bold uppercase tracking-wider">
+                {node.title}
+              </span>
+              {node.desc && (
+                <span className="text-[0.62rem] font-sans opacity-80 mt-0.5">
+                  {node.desc}
+                </span>
+              )}
             </div>
           </div>
         ))}

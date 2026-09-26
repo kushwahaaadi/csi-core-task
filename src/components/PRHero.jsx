@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
-import { Sparkles, Trophy, Users, ArrowRight, Copy, Check, Flame, Award } from 'lucide-react';
-import { MegaphoneIllustration, ReferralKeyCard } from './PRIllustrations';
-import { formatEnrollment } from '../lib/validation';
+import React, { useState } from "react";
+import {
+  Sparkles,
+  Trophy,
+  Users,
+  ArrowRight,
+  Copy,
+  Check,
+  Flame,
+  Award,
+} from "lucide-react";
+import { MegaphoneIllustration, ReferralKeyCard } from "./PRIllustrations";
+import { formatEnrollment } from "../lib/validation";
 
-export default function PRHero({ onOpenRegister, defaultEnrollment = 'S24CSEU1214' }) {
+export default function PRHero({
+  onOpenRegister,
+  defaultEnrollment = "S24CSEU1214",
+}) {
   const [copied, setCopied] = useState(false);
 
   const handleCopyLink = () => {
@@ -20,7 +32,6 @@ export default function PRHero({ onOpenRegister, defaultEnrollment = 'S24CSEU121
 
       <div className="mx-auto w-full max-w-[1100px] px-5 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          
           {/* Left: Text & Action */}
           <div className="lg:col-span-8 space-y-6 pr-4">
             <div className="inline-flex items-center gap-2 rounded-full bg-blush/20 border border-blush/40 px-3.5 py-1 text-xs font-mono uppercase tracking-wider text-blush">
@@ -30,11 +41,17 @@ export default function PRHero({ onOpenRegister, defaultEnrollment = 'S24CSEU121
 
             <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] font-extrabold uppercase leading-[1.1] tracking-[0.02em]">
               Turn Your Network Into
-              <span className="block text-blush mt-1">Campus Legend Status</span>
+              <span className="block text-blush mt-1">
+                Campus Legend Status
+              </span>
             </h2>
 
             <p className="max-w-[44ch] text-sm sm:text-base leading-relaxed text-cream/75 font-sans">
-              Your network is your reach. Your reach is your impact. As a CSI Bennett PR & Management Junior, your mission is simple: bring students to HYPE 4.0, CSI Bennett's hands-on Git & GitHub bootcamp. Every verified attendee through your recruitment key earns +100 XP and moves you higher on the campus leaderboard.
+              Your network is your reach. Your reach is your impact. As a CSI
+              Bennett PR & Management Junior, your mission is simple: bring
+              students to HYPE 4.0, CSI Bennett's hands-on Git & GitHub
+              bootcamp. Every verified attendee through your recruitment key
+              earns +100 XP and moves you higher on the campus leaderboard.
             </p>
 
             {/* Quick Action Buttons */}
@@ -67,14 +84,16 @@ export default function PRHero({ onOpenRegister, defaultEnrollment = 'S24CSEU121
 
           {/* Right: Interactive Pass Card & Illustration */}
           <div className="lg:col-span-4 flex flex-col items-center sm:items-end space-y-4">
-            <ReferralKeyCard enrollment={defaultEnrollment} className="w-full" />
+            <ReferralKeyCard
+              enrollment={defaultEnrollment}
+              className="w-full"
+            />
 
             {/* Megaphone SVG Illustration */}
             <div className="w-full max-w-xs -mt-4 opacity-90 hover:opacity-100 transition-opacity">
               <MegaphoneIllustration />
             </div>
           </div>
-
         </div>
       </div>
     </section>

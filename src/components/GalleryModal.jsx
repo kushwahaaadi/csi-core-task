@@ -1,63 +1,63 @@
-import React, { useState } from 'react';
-import { X, ZoomIn, Heart, Share2 } from 'lucide-react';
+import React, { useState } from "react";
+import { X, ZoomIn, Heart, Share2 } from "lucide-react";
 
 const GALLERY_ITEMS = [
   {
     id: 1,
-    title: 'HackBU 2026 Midnight Hacking Floor',
-    caption: 'Over 120 teams pushing code at 3:15 AM in Bennett Sports Arena.',
-    img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80',
-    tag: 'Hackathon'
+    title: "HackBU 2026 Midnight Hacking Floor",
+    caption: "Over 120 teams pushing code at 3:15 AM in Bennett Sports Arena.",
+    img: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1000&q=80",
+    tag: "Hackathon",
   },
   {
     id: 2,
-    title: 'Autonomous Rover & Embedded Systems Demo',
-    caption: 'Hardware Pod testing lidar navigation in Academic Block C.',
-    img: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80',
-    tag: 'Robotics'
+    title: "Autonomous Rover & Embedded Systems Demo",
+    caption: "Hardware Pod testing lidar navigation in Academic Block C.",
+    img: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=1000&q=80",
+    tag: "Robotics",
   },
   {
     id: 3,
-    title: 'Agentic AI Masterclass Live Demo',
-    caption: 'Deep dive into LangGraph and local vector embeddings.',
-    img: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80',
-    tag: 'AI/ML'
+    title: "Agentic AI Masterclass Live Demo",
+    caption: "Deep dive into LangGraph and local vector embeddings.",
+    img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80",
+    tag: "AI/ML",
   },
   {
     id: 4,
-    title: 'Silicon Circuitry & Firmware Workshop',
-    caption: 'Hands-on ESP32 and micro-controller assembly in Lab 201.',
-    img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80',
-    tag: 'Hardware'
+    title: "Silicon Circuitry & Firmware Workshop",
+    caption: "Hands-on ESP32 and micro-controller assembly in Lab 201.",
+    img: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80",
+    tag: "Hardware",
   },
   {
     id: 5,
-    title: 'NullSector Cyber CTF Defense Room',
-    caption: 'Red teams and Blue teams clashing in real-time network exploits.',
-    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80',
-    tag: 'Cybersecurity'
+    title: "NullSector Cyber CTF Defense Room",
+    caption: "Red teams and Blue teams clashing in real-time network exploits.",
+    img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1000&q=80",
+    tag: "Cybersecurity",
   },
   {
     id: 6,
-    title: 'CodeRush Bennett Championship Podium',
-    caption: 'Bennett University leaderboard champions receiving CSI mementos.',
-    img: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80',
-    tag: 'Community'
+    title: "CodeRush Bennett Championship Podium",
+    caption: "Bennett University leaderboard champions receiving CSI mementos.",
+    img: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1000&q=80",
+    tag: "Community",
   },
   {
     id: 7,
-    title: 'Collaborative Open Source Sprint',
-    caption: 'Students reviewing pull requests and merging documentation.',
-    img: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80',
-    tag: 'Open Source'
+    title: "Collaborative Open Source Sprint",
+    caption: "Students reviewing pull requests and merging documentation.",
+    img: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80",
+    tag: "Open Source",
   },
   {
     id: 8,
-    title: 'High-Density Workstation Labs',
-    caption: 'Dual monitor rigs dialed in for algorithm optimization.',
-    img: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1000&q=80',
-    tag: 'Campus'
-  }
+    title: "High-Density Workstation Labs",
+    caption: "Dual monitor rigs dialed in for algorithm optimization.",
+    img: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1000&q=80",
+    tag: "Campus",
+  },
 ];
 
 export default function GalleryModal({ isOpen, onClose }) {
@@ -67,7 +67,7 @@ export default function GalleryModal({ isOpen, onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-soil/85 backdrop-blur-md animate-[fadeIn_0.2s_ease-out]">
-      <div 
+      <div
         className="relative w-full max-w-5xl overflow-hidden rounded-3xl bg-cream text-soil shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-soil/15 max-h-[90vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
@@ -76,7 +76,9 @@ export default function GalleryModal({ isOpen, onClose }) {
           <div>
             <div className="flex items-center gap-2">
               <span className="inline-block w-2 h-2 rounded-full bg-blush"></span>
-              <p className="text-xs font-mono uppercase tracking-wider text-soil/60">Bennett Visual Archive</p>
+              <p className="text-xs font-mono uppercase tracking-wider text-soil/60">
+                Bennett Visual Archive
+              </p>
             </div>
             <h3 className="font-display text-2xl font-bold uppercase tracking-tight text-soil">
               Captured Moments & Milestones

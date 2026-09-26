@@ -1,31 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  X, 
-  Crown, 
-  UserCheck, 
-  Download, 
-  Search, 
-  Database, 
-  Calendar, 
-  ExternalLink, 
-  CheckCircle2, 
+import React, { useState, useEffect } from "react";
+import {
+  X,
+  Crown,
+  UserCheck,
+  Download,
+  Search,
+  Database,
+  Calendar,
+  ExternalLink,
+  CheckCircle2,
   Sparkles,
   Users,
   Award,
-  ChevronRight
-} from 'lucide-react';
-import { getLeaderboard, getAllRegistrations, EVENT_DETAILS, getStoredSupabaseConfig } from '../lib/supabase';
-import { formatEnrollment } from '../lib/validation';
+  ChevronRight,
+} from "lucide-react";
+import {
+  getLeaderboard,
+  getAllRegistrations,
+  EVENT_DETAILS,
+  getStoredSupabaseConfig,
+} from "../lib/supabase";
+import { formatEnrollment } from "../lib/validation";
 
-export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupabaseConfig }) {
+export default function AdminInterviewerDashboard({
+  isOpen,
+  onClose,
+  onOpenSupabaseConfig,
+}) {
   const [candidates, setCandidates] = useState([]);
   const [registrations, setRegistrations] = useState([]);
   const [selectedCandidate, setSelectedCandidate] = useState(null);
-  const [search, setSearch] = useState('');
-  const [supabaseConfig, setSupabaseConfig] = useState(getStoredSupabaseConfig());
+  const [search, setSearch] = useState("");
+  const [supabaseConfig, setSupabaseConfig] = useState(
+    getStoredSupabaseConfig(),
+  );
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [password, setPassword] = useState('');
-  const [authError, setAuthError] = useState('');
+  const [password, setPassword] = useState("");
+  const [authError, setAuthError] = useState("");
 
   useEffect(() => {
     if (isOpen) {
@@ -33,7 +44,7 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
         loadData();
       }
     } else {
-      setPassword('');
+      setPassword("");
     }
   }, [isOpen, isAuthenticated]);
 
@@ -50,11 +61,11 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (password === 'CSI#HACKACCINO2026') {
+    if (password === "CSI#HACKACCINO2026") {
       setIsAuthenticated(true);
-      setAuthError('');
+      setAuthError("");
     } else {
-      setAuthError('Incorrect admin password');
+      setAuthError("Incorrect admin password");
     }
   };
 
@@ -63,7 +74,7 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
   if (!isAuthenticated) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-soil/90 backdrop-blur-md animate-[fadeIn_0.2s_ease-out]">
-        <div 
+        <div
           className="relative w-full max-w-sm overflow-hidden rounded-3xl bg-cream text-soil shadow-2xl border border-soil/20 p-8 text-center"
           onClick={(e) => e.stopPropagation()}
         >
@@ -85,7 +96,11 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
               className="w-full rounded-xl border border-soil/20 bg-white px-4 py-2.5 text-sm text-center text-soil focus:border-blush focus:outline-none focus:ring-2 focus:ring-blush/20"
               autoFocus
             />
-            {authError && <p className="text-xs font-bold text-red-500 bg-red-50 p-2 rounded-lg">{authError}</p>}
+            {authError && (
+              <p className="text-xs font-bold text-red-500 bg-red-50 p-2 rounded-lg">
+                {authError}
+              </p>
+            )}
             <button
               type="submit"
               className="w-full rounded-full bg-soil py-3 text-xs font-semibold uppercase tracking-wider text-cream transition-all hover:bg-blush hover:text-soil shadow-md"
@@ -108,12 +123,14 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
   const filteredCandidates = candidates.filter(
     (c) =>
       c.name.toLowerCase().includes(search.toLowerCase()) ||
-      c.enrollment.toLowerCase().includes(search.toLowerCase())
+      c.enrollment.toLowerCase().includes(search.toLowerCase()),
   );
 
   const candidateAttendees = selectedCandidate
     ? registrations.filter(
-        (r) => formatEnrollment(r.juniorEnrollment) === formatEnrollment(selectedCandidate.enrollment)
+        (r) =>
+          formatEnrollment(r.juniorEnrollment) ===
+          formatEnrollment(selectedCandidate.enrollment),
       )
     : [];
 
@@ -121,41 +138,44 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
 
   const exportCSV = () => {
     const headers = [
-      'Candidate_Name',
-      'Candidate_Enrollment',
-      'Candidate_Rank',
-      'Student_Name',
-      'Student_Enrollment',
-      'Student_Email',
-      'Student_Phone',
-      'Event_Name',
-      'Timestamp',
+      "Candidate_Name",
+      "Candidate_Enrollment",
+      "Candidate_Rank",
+      "Student_Name",
+      "Student_Enrollment",
+      "Student_Email",
+      "Student_Phone",
+      "Event_Name",
+      "Timestamp",
     ];
 
     const rows = registrations.map((r) => {
       const cand = candidates.find(
-        (c) => formatEnrollment(c.enrollment) === formatEnrollment(r.juniorEnrollment)
+        (c) =>
+          formatEnrollment(c.enrollment) ===
+          formatEnrollment(r.juniorEnrollment),
       );
       return [
-        `"${cand?.name || r.juniorName || ''}"`,
+        `"${cand?.name || r.juniorName || ""}"`,
         `"${r.juniorEnrollment}"`,
-        `"${cand?.rank || ''}"`,
+        `"${cand?.rank || ""}"`,
         `"${r.studentName}"`,
         `"${r.studentEnrollment}"`,
-        `"${r.studentEmail || ''}"`,
-        `"${r.studentPhone || ''}"`,
+        `"${r.studentEmail || ""}"`,
+        `"${r.studentPhone || ""}"`,
         `"${r.eventName}"`,
         `"${r.timestamp}"`,
-      ].join(',');
+      ].join(",");
     });
 
-    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows].join('\n');
+    const csvContent =
+      "data:text/csv;charset=utf-8," + [headers.join(","), ...rows].join("\n");
     const encodedUri = encodeURI(csvContent);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
     link.setAttribute(
-      'download',
-      `CSI_BU_HYPE4_Interview_Task_Results_${new Date().toISOString().split('T')[0]}.csv`
+      "download",
+      `CSI_BU_HYPE4_Interview_Task_Results_${new Date().toISOString().split("T")[0]}.csv`,
     );
     document.body.appendChild(link);
     link.click();
@@ -164,7 +184,7 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-soil/90 backdrop-blur-md animate-[fadeIn_0.2s_ease-out]">
-      <div 
+      <div
         className="relative w-full max-w-6xl overflow-hidden rounded-3xl bg-cream text-soil shadow-[0_25px_70px_rgba(0,0,0,0.6)] border border-soil/20 max-h-[94vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
@@ -210,10 +230,16 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
         {/* Event Quick Bar */}
         <div className="bg-blush/15 border-b border-blush/30 px-6 sm:px-8 py-3 flex flex-wrap items-center justify-between gap-3 text-xs font-sans">
           <div className="flex items-center gap-2">
-            <span className="font-bold text-soil">Assigned Interview Task:</span>
-            <span className="font-mono text-soil/80">Rally students for <strong>{EVENT_DETAILS.title}</strong></span>
+            <span className="font-bold text-soil">
+              Assigned Interview Task:
+            </span>
+            <span className="font-mono text-soil/80">
+              Rally students for <strong>{EVENT_DETAILS.title}</strong>
+            </span>
             <span className="text-soil/40">•</span>
-            <span className="font-mono text-soil/70">{EVENT_DETAILS.date} | {EVENT_DETAILS.venue}</span>
+            <span className="font-mono text-soil/70">
+              {EVENT_DETAILS.date} | {EVENT_DETAILS.venue}
+            </span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -231,8 +257,13 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
               onClick={onOpenSupabaseConfig}
               className="text-xs font-mono text-soil/70 hover:text-emerald-700 flex items-center gap-1"
             >
-              <Database size={12} className={supabaseConfig.url ? "text-emerald-500" : "text-amber-500"} />
-              {supabaseConfig.url ? 'Supabase Connected' : 'Connect Supabase'}
+              <Database
+                size={12}
+                className={
+                  supabaseConfig.url ? "text-emerald-500" : "text-amber-500"
+                }
+              />
+              {supabaseConfig.url ? "Supabase Connected" : "Connect Supabase"}
             </button>
           </div>
         </div>
@@ -242,36 +273,55 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
           {/* Key Metrics Row */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             <div className="rounded-2xl bg-white p-4 border border-soil/10 shadow-sm">
-              <span className="text-[0.68rem] font-mono text-soil/50 uppercase">TOTAL APPLICANTS</span>
-              <p className="font-display text-2xl sm:text-3xl font-bold text-soil mt-1">{candidates.length}</p>
-              <span className="text-[0.68rem] text-soil/60 font-sans">PR & Management Juniors</span>
+              <span className="text-[0.68rem] font-mono text-soil/50 uppercase">
+                TOTAL APPLICANTS
+              </span>
+              <p className="font-display text-2xl sm:text-3xl font-bold text-soil mt-1">
+                {candidates.length}
+              </p>
+              <span className="text-[0.68rem] text-soil/60 font-sans">
+                PR & Management Juniors
+              </span>
             </div>
             <div className="rounded-2xl bg-white p-4 border border-soil/10 shadow-sm">
-              <span className="text-[0.68rem] font-mono text-soil/50 uppercase">TOTAL CONVINCED ATTENDEES</span>
-              <p className="font-display text-2xl sm:text-3xl font-bold text-blush mt-1">{totalAttendees}</p>
-              <span className="text-[0.68rem] text-soil/60 font-sans">Registered for HYPE 4.0</span>
+              <span className="text-[0.68rem] font-mono text-soil/50 uppercase">
+                TOTAL CONVINCED ATTENDEES
+              </span>
+              <p className="font-display text-2xl sm:text-3xl font-bold text-blush mt-1">
+                {totalAttendees}
+              </p>
+              <span className="text-[0.68rem] text-soil/60 font-sans">
+                Registered for HYPE 4.0
+              </span>
             </div>
             <div className="rounded-2xl bg-white p-4 border border-soil/10 shadow-sm">
-              <span className="text-[0.68rem] font-mono text-soil/50 uppercase">TOP CANDIDATE</span>
+              <span className="text-[0.68rem] font-mono text-soil/50 uppercase">
+                TOP CANDIDATE
+              </span>
               <p className="font-display text-xl sm:text-2xl font-bold text-soil mt-1 truncate">
-                {candidates[0]?.name || 'N/A'}
+                {candidates[0]?.name || "N/A"}
               </p>
               <span className="text-[0.68rem] font-mono text-emerald-600 font-bold">
                 {candidates[0]?.referralsCount || 0} Registrations Logged
               </span>
             </div>
             <div className="rounded-2xl bg-white p-4 border border-soil/10 shadow-sm">
-              <span className="text-[0.68rem] font-mono text-soil/50 uppercase">AVERAGE CONVERSION</span>
+              <span className="text-[0.68rem] font-mono text-soil/50 uppercase">
+                AVERAGE CONVERSION
+              </span>
               <p className="font-display text-2xl sm:text-3xl font-bold text-soil mt-1">
-                {candidates.length ? (totalAttendees / candidates.length).toFixed(1) : 0}
+                {candidates.length
+                  ? (totalAttendees / candidates.length).toFixed(1)
+                  : 0}
               </p>
-              <span className="text-[0.68rem] text-soil/60 font-sans">Students / Candidate</span>
+              <span className="text-[0.68rem] text-soil/60 font-sans">
+                Students / Candidate
+              </span>
             </div>
           </div>
 
           {/* Split View: Candidates List (Left) & Selected Candidate Recruited Students (Right) */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            
             {/* Left: Candidates Ranking List */}
             <div className="lg:col-span-5 rounded-2xl bg-white p-5 border border-soil/15 shadow-sm space-y-4">
               <div className="flex items-center justify-between border-b border-soil/10 pb-3">
@@ -279,7 +329,10 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
                   Junior Applicants
                 </h4>
                 <div className="relative w-40">
-                  <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-soil/40" />
+                  <Search
+                    size={14}
+                    className="absolute left-2.5 top-1/2 -translate-y-1/2 text-soil/40"
+                  />
                   <input
                     type="text"
                     placeholder="Search..."
@@ -292,7 +345,10 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
 
               <div className="space-y-2 max-h-[380px] overflow-y-auto pr-1">
                 {filteredCandidates.map((c) => {
-                  const isSelected = selectedCandidate && formatEnrollment(c.enrollment) === formatEnrollment(selectedCandidate.enrollment);
+                  const isSelected =
+                    selectedCandidate &&
+                    formatEnrollment(c.enrollment) ===
+                      formatEnrollment(selectedCandidate.enrollment);
 
                   return (
                     <div
@@ -300,14 +356,18 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
                       onClick={() => setSelectedCandidate(c)}
                       className={`p-3 rounded-xl border cursor-pointer transition-all duration-150 flex items-center justify-between ${
                         isSelected
-                          ? 'border-blush bg-blush/10 shadow-sm'
-                          : 'border-soil/10 bg-cream/30 hover:bg-cream/70'
+                          ? "border-blush bg-blush/10 shadow-sm"
+                          : "border-soil/10 bg-cream/30 hover:bg-cream/70"
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        <span className={`font-mono font-bold text-xs w-6 text-center ${
-                          c.rank === 1 ? 'text-blush font-black' : 'text-soil/50'
-                        }`}>
+                        <span
+                          className={`font-mono font-bold text-xs w-6 text-center ${
+                            c.rank === 1
+                              ? "text-blush font-black"
+                              : "text-soil/50"
+                          }`}
+                        >
                           #{c.rank}
                         </span>
                         <img
@@ -345,9 +405,12 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
                 <>
                   <div className="flex flex-wrap items-center justify-between border-b border-soil/10 pb-3 gap-2">
                     <div>
-                      <span className="text-[0.65rem] font-mono text-blush uppercase font-bold tracking-wider">Candidate Outreach Portfolio</span>
+                      <span className="text-[0.65rem] font-mono text-blush uppercase font-bold tracking-wider">
+                        Candidate Outreach Portfolio
+                      </span>
                       <h4 className="font-display text-xl font-bold uppercase text-soil">
-                        {selectedCandidate.name} ({selectedCandidate.enrollment})
+                        {selectedCandidate.name} ({selectedCandidate.enrollment}
+                        )
                       </h4>
                     </div>
 
@@ -370,14 +433,22 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
                     {candidateAttendees.length > 0 ? (
                       <div className="divide-y divide-soil/10 max-h-[320px] overflow-y-auto border border-soil/10 rounded-xl">
                         {candidateAttendees.map((att, i) => (
-                          <div key={i} className="p-3 bg-cream/20 hover:bg-cream/50 transition-colors flex items-center justify-between text-xs">
+                          <div
+                            key={i}
+                            className="p-3 bg-cream/20 hover:bg-cream/50 transition-colors flex items-center justify-between text-xs"
+                          >
                             <div>
                               <div className="flex items-center gap-2">
-                                <span className="font-bold text-soil font-sans">{att.studentName}</span>
-                                <span className="font-mono text-blush font-semibold">{att.studentEnrollment}</span>
+                                <span className="font-bold text-soil font-sans">
+                                  {att.studentName}
+                                </span>
+                                <span className="font-mono text-blush font-semibold">
+                                  {att.studentEnrollment}
+                                </span>
                               </div>
                               <p className="text-[0.68rem] text-soil/60 font-mono mt-0.5">
-                                {att.studentEmail} • {att.studentPhone || 'No Phone'}
+                                {att.studentEmail} •{" "}
+                                {att.studentPhone || "No Phone"}
                               </p>
                             </div>
 
@@ -387,7 +458,10 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
                                 Verified Lead
                               </span>
                               <span className="block text-[0.62rem] text-soil/40 font-mono mt-0.5">
-                                {new Date(att.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                {new Date(att.timestamp).toLocaleTimeString(
+                                  [],
+                                  { hour: "2-digit", minute: "2-digit" },
+                                )}
                               </span>
                             </div>
                           </div>
@@ -402,11 +476,11 @@ export default function AdminInterviewerDashboard({ isOpen, onClose, onOpenSupab
                 </>
               ) : (
                 <div className="p-8 text-center text-xs text-soil/50 font-mono">
-                  Select a candidate from the left to inspect their convinced attendees.
+                  Select a candidate from the left to inspect their convinced
+                  attendees.
                 </div>
               )}
             </div>
-
           </div>
         </div>
       </div>

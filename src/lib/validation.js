@@ -7,11 +7,11 @@
 export const BENNETT_ENROLLMENT_REGEX = /^[esES]\d{2}[a-zA-Z]{2,5}\d{3,5}$/;
 
 export function validateBennettEnrollment(enrollment) {
-  if (!enrollment || typeof enrollment !== 'string') {
+  if (!enrollment || typeof enrollment !== "string") {
     return {
       isValid: false,
-      message: 'Enrollment number is required.',
-      normalized: '',
+      message: "Enrollment number is required.",
+      normalized: "",
     };
   }
 
@@ -22,7 +22,8 @@ export function validateBennettEnrollment(enrollment) {
   if (trimmed.length < 8 || trimmed.length > 15) {
     return {
       isValid: false,
-      message: 'Enrollment must be between 8 and 14 characters (e.g., S24CSEU1214).',
+      message:
+        "Enrollment must be between 8 and 14 characters (e.g., S24CSEU1214).",
       normalized,
     };
   }
@@ -30,25 +31,26 @@ export function validateBennettEnrollment(enrollment) {
   if (!BENNETT_ENROLLMENT_REGEX.test(trimmed)) {
     return {
       isValid: false,
-      message: 'Invalid Bennett format. Expected format: S24CSEU1214 or E23CSEU0045.',
+      message:
+        "Invalid Bennett format. Expected format: S24CSEU1214 or E23CSEU0045.",
       normalized,
     };
   }
 
   // Parse details
   const prefix = normalized[0]; // 'S' or 'E'
-  const year = '20' + normalized.slice(1, 3);
-  
+  const year = "20" + normalized.slice(1, 3);
+
   return {
     isValid: true,
     message: `Valid Bennett University (${year} Batch)`,
     normalized,
     batchYear: year,
-    studentType: prefix === 'S' ? 'Student' : 'Enrolled Scholar',
+    studentType: prefix === "S" ? "Student" : "Enrolled Scholar",
   };
 }
 
 export function formatEnrollment(val) {
-  if (!val) return '';
+  if (!val) return "";
   return val.trim().toUpperCase();
 }

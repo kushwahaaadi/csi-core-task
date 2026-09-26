@@ -1,44 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import confetti from 'canvas-confetti';
-import { 
-  X, 
-  CheckCircle2, 
-  AlertCircle, 
-  Sparkles, 
-  UserCheck, 
-  ArrowRight, 
-  Copy, 
-  Check, 
+import React, { useState, useEffect } from "react";
+import confetti from "canvas-confetti";
+import {
+  X,
+  CheckCircle2,
+  AlertCircle,
+  Sparkles,
+  UserCheck,
+  ArrowRight,
+  Copy,
+  Check,
   ExternalLink,
-  Laptop
-} from 'lucide-react';
-import { validateBennettEnrollment, formatEnrollment } from '../lib/validation';
-import { submitRegistration, EVENT_DETAILS } from '../lib/supabase';
+  Laptop,
+} from "lucide-react";
+import { validateBennettEnrollment, formatEnrollment } from "../lib/validation";
+import { submitRegistration, EVENT_DETAILS } from "../lib/supabase";
 
-export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollment = '', onRegistrationSuccess }) {
-  const [juniorName, setJuniorName] = useState('');
-  const [juniorEnrollment, setJuniorEnrollment] = useState(defaultJuniorEnrollment || 'S24CSEU1214');
-  
+export default function PRRegisterModal({
+  isOpen,
+  onClose,
+  defaultJuniorEnrollment = "",
+  onRegistrationSuccess,
+}) {
+  const [juniorName, setJuniorName] = useState("");
+  const [juniorEnrollment, setJuniorEnrollment] = useState(
+    defaultJuniorEnrollment || "S24CSEU1214",
+  );
+
   // Attendee state
-  const [studentName, setStudentName] = useState('');
-  const [studentEnrollment, setStudentEnrollment] = useState('');
-  const [studentEmail, setStudentEmail] = useState('');
-  const [studentPhone, setStudentPhone] = useState('');
+  const [studentName, setStudentName] = useState("");
+  const [studentEnrollment, setStudentEnrollment] = useState("");
+  const [studentEmail, setStudentEmail] = useState("");
+  const [studentPhone, setStudentPhone] = useState("");
   const [lumaConfirmed, setLumaConfirmed] = useState(true);
 
   // Validation feedback
-  const [juniorVal, setJuniorVal] = useState({ isValid: true, message: '' });
-  const [studentVal, setStudentVal] = useState({ isValid: false, message: '' });
-  
+  const [juniorVal, setJuniorVal] = useState({ isValid: true, message: "" });
+  const [studentVal, setStudentVal] = useState({ isValid: false, message: "" });
+
   // Submission state
   const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState("");
   const [successData, setSuccessData] = useState(null);
   const [copiedKey, setCopiedKey] = useState(false);
 
   useEffect(() => {
     try {
-      const savedJunior = localStorage.getItem('csi_bu_active_junior');
+      const savedJunior = localStorage.getItem("csi_bu_active_junior");
       if (savedJunior) {
         const parsed = JSON.parse(savedJunior);
         if (parsed.enrollment) setJuniorEnrollment(parsed.enrollment);
@@ -63,7 +70,7 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
     if (studentEnrollment) {
       setStudentVal(validateBennettEnrollment(studentEnrollment));
     } else {
-      setStudentVal({ isValid: false, message: '' });
+      setStudentVal({ isValid: false, message: "" });
     }
   }, [studentEnrollment]);
 
@@ -71,7 +78,7 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMsg('');
+    setErrorMsg("");
 
     const valJ = validateBennettEnrollment(juniorEnrollment);
     if (!valJ.isValid) {
@@ -86,7 +93,9 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
     }
 
     if (valJ.normalized === valS.normalized) {
-      setErrorMsg('Self-referral is forbidden! You cannot log yourself as the convinced attendee.');
+      setErrorMsg(
+        "Self-referral is forbidden! You cannot log yourself as the convinced attendee.",
+      );
       return;
     }
 
@@ -98,48 +107,53 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
         juniorEnrollment: valJ.normalized,
         studentName: studentName.trim(),
         studentEnrollment: valS.normalized,
-        studentEmail: studentEmail.trim() || `${valS.normalized.toLowerCase()}@bennett.edu.in`,
+        studentEmail:
+          studentEmail.trim() ||
+          `${valS.normalized.toLowerCase()}@bennett.edu.in`,
         studentPhone: studentPhone.trim(),
         eventName: EVENT_DETAILS.title,
         lumaConfirmation: lumaConfirmed,
       });
 
       if (!res.success) {
-        setErrorMsg(res.error || 'Failed to submit registration.');
+        setErrorMsg(res.error || "Failed to submit registration.");
         setLoading(false);
         return;
       }
 
-      localStorage.setItem('csi_bu_active_junior', JSON.stringify({
-        enrollment: valJ.normalized,
-        name: juniorName.trim()
-      }));
+      localStorage.setItem(
+        "csi_bu_active_junior",
+        JSON.stringify({
+          enrollment: valJ.normalized,
+          name: juniorName.trim(),
+        }),
+      );
 
       try {
         confetti({
           particleCount: 120,
           spread: 85,
           origin: { y: 0.6 },
-          colors: ['#f2765e', '#315b8c', '#e8c9a8', '#ffffff', '#22c55e']
+          colors: ["#f2765e", "#315b8c", "#e8c9a8", "#ffffff", "#22c55e"],
         });
       } catch (err) {}
 
       setSuccessData(res);
       if (onRegistrationSuccess) onRegistrationSuccess(res);
     } catch (err) {
-      setErrorMsg(err.message || 'An unexpected error occurred.');
+      setErrorMsg(err.message || "An unexpected error occurred.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleRegisterAnother = () => {
-    setStudentName('');
-    setStudentEnrollment('');
-    setStudentEmail('');
-    setStudentPhone('');
+    setStudentName("");
+    setStudentEnrollment("");
+    setStudentEmail("");
+    setStudentPhone("");
     setSuccessData(null);
-    setErrorMsg('');
+    setErrorMsg("");
   };
 
   const copyReferralKey = () => {
@@ -150,7 +164,7 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-soil/85 backdrop-blur-md animate-[fadeIn_0.2s_ease-out]">
-      <div 
+      <div
         className="relative w-full max-w-2xl overflow-hidden rounded-3xl bg-cream text-soil shadow-[0_25px_60px_rgba(0,0,0,0.5)] border border-soil/15 max-h-[94vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
@@ -186,7 +200,9 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
         <div className="bg-blush/10 border-b border-blush/20 px-6 sm:px-8 py-2.5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-4 text-xs font-sans">
           <div className="flex items-center gap-2 w-full truncate">
             <span className="font-bold text-soil shrink-0">Event:</span>
-            <span className="font-mono text-soil/80 truncate">HYPE 4.0 (28 Sept | PLH 101, Bennett Univ)</span>
+            <span className="font-mono text-soil/80 truncate">
+              HYPE 4.0 (28 Sept | PLH 101, Bennett Univ)
+            </span>
           </div>
           <a
             href={EVENT_DETAILS.lumaUrl}
@@ -222,8 +238,12 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
                     onClick={copyReferralKey}
                     className="text-[0.7rem] font-mono text-soil/60 hover:text-blush flex items-center gap-1 transition-colors"
                   >
-                    {copiedKey ? <Check size={12} className="text-emerald-500" /> : <Copy size={12} />}
-                    {copiedKey ? 'Copied Key!' : 'Copy Recruitment Key'}
+                    {copiedKey ? (
+                      <Check size={12} className="text-emerald-500" />
+                    ) : (
+                      <Copy size={12} />
+                    )}
+                    {copiedKey ? "Copied Key!" : "Copy Recruitment Key"}
                   </button>
                 </div>
 
@@ -251,12 +271,20 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
                       required
                       placeholder="e.g. S24CSEU1214"
                       value={juniorEnrollment}
-                      onChange={(e) => setJuniorEnrollment(e.target.value.toUpperCase())}
+                      onChange={(e) =>
+                        setJuniorEnrollment(e.target.value.toUpperCase())
+                      }
                       className="w-full rounded-xl border border-soil/20 bg-cream/50 px-3.5 py-2 text-sm font-mono tracking-wider font-bold text-soil focus:border-blush focus:outline-none focus:ring-2 focus:ring-blush/20"
                     />
                     <div className="mt-1 flex items-center justify-between text-[0.65rem] font-mono">
-                      <span className={juniorVal.isValid ? 'text-emerald-600 font-semibold' : 'text-amber-600'}>
-                        {juniorVal.message || 'Example: S24CSEU1214'}
+                      <span
+                        className={
+                          juniorVal.isValid
+                            ? "text-emerald-600 font-semibold"
+                            : "text-amber-600"
+                        }
+                      >
+                        {juniorVal.message || "Example: S24CSEU1214"}
                       </span>
                     </div>
                   </div>
@@ -270,7 +298,9 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
                     <Sparkles size={14} className="text-accent-blue" />
                     2. Recruited Student (Attendee for HYPE 4.0)
                   </span>
-                  <span className="text-[0.68rem] text-soil/50 font-mono">DEDUPLICATION ACTIVE</span>
+                  <span className="text-[0.68rem] text-soil/50 font-mono">
+                    DEDUPLICATION ACTIVE
+                  </span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -297,16 +327,25 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
                       required
                       placeholder="e.g. S24CSEU0845"
                       value={studentEnrollment}
-                      onChange={(e) => setStudentEnrollment(e.target.value.toUpperCase())}
+                      onChange={(e) =>
+                        setStudentEnrollment(e.target.value.toUpperCase())
+                      }
                       className={`w-full rounded-xl border px-3.5 py-2 text-sm font-mono tracking-wider focus:outline-none focus:ring-2 transition-all ${
                         studentVal.isValid
-                          ? 'border-emerald-500 bg-emerald-50/50 text-emerald-900 font-bold'
-                          : 'border-soil/20 bg-cream/50 focus:border-blush focus:ring-blush/20'
+                          ? "border-emerald-500 bg-emerald-50/50 text-emerald-900 font-bold"
+                          : "border-soil/20 bg-cream/50 focus:border-blush focus:ring-blush/20"
                       }`}
                     />
                     <div className="mt-1 flex items-center justify-between text-[0.65rem] font-mono">
-                      <span className={studentVal.isValid ? 'text-emerald-600 font-semibold' : 'text-soil/50'}>
-                        {studentVal.message || 'Must be a valid Bennett University enrollment'}
+                      <span
+                        className={
+                          studentVal.isValid
+                            ? "text-emerald-600 font-semibold"
+                            : "text-soil/50"
+                        }
+                      >
+                        {studentVal.message ||
+                          "Must be a valid Bennett University enrollment"}
                       </span>
                     </div>
                   </div>
@@ -348,8 +387,12 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
                     onChange={(e) => setLumaConfirmed(e.target.checked)}
                     className="h-4 w-4 rounded border-soil/30 text-blush focus:ring-blush"
                   />
-                  <label htmlFor="lumaCheck" className="text-xs text-soil/80 font-sans cursor-pointer">
-                    Recruited student confirmed they will attend <strong>HYPE 4.0</strong> on 28th Sept with their laptop.
+                  <label
+                    htmlFor="lumaCheck"
+                    className="text-xs text-soil/80 font-sans cursor-pointer"
+                  >
+                    Recruited student confirmed they will attend{" "}
+                    <strong>HYPE 4.0</strong> on 28th Sept with their laptop.
                   </label>
                 </div>
               </div>
@@ -367,7 +410,8 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
                   </span>
                 ) : (
                   <>
-                    Confirm Registration (+100 XP for {juniorEnrollment || 'You'})
+                    Confirm Registration (+100 XP for{" "}
+                    {juniorEnrollment || "You"})
                     <ArrowRight size={16} />
                   </>
                 )}
@@ -388,7 +432,10 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
                   Registration Successfully Verified!
                 </h4>
                 <p className="mt-1 text-sm text-soil/75 max-w-md mx-auto font-sans">
-                  <strong>{successData.registration.studentName}</strong> ({successData.registration.studentEnrollment}) has been officially registered under your candidate key for <strong>HYPE 4.0</strong>!
+                  <strong>{successData.registration.studentName}</strong> (
+                  {successData.registration.studentEnrollment}) has been
+                  officially registered under your candidate key for{" "}
+                  <strong>HYPE 4.0</strong>!
                 </p>
               </div>
 
@@ -400,19 +447,27 @@ export default function PRRegisterModal({ isOpen, onClose, defaultJuniorEnrollme
                 </div>
                 <div className="flex justify-between text-xs">
                   <span className="text-soil/60">STUDENT:</span>
-                  <span className="font-bold text-soil">{successData.registration.studentName}</span>
+                  <span className="font-bold text-soil">
+                    {successData.registration.studentName}
+                  </span>
                 </div>
                 <div className="flex justify-between text-xs">
                   <span className="text-soil/60">ENROLLMENT:</span>
-                  <span className="font-bold text-soil">{successData.registration.studentEnrollment}</span>
+                  <span className="font-bold text-soil">
+                    {successData.registration.studentEnrollment}
+                  </span>
                 </div>
                 <div className="flex justify-between text-xs">
                   <span className="text-soil/60">RECRUITED BY CANDIDATE:</span>
-                  <span className="text-blush font-bold">{successData.registration.juniorEnrollment}</span>
+                  <span className="text-blush font-bold">
+                    {successData.registration.juniorEnrollment}
+                  </span>
                 </div>
                 <div className="flex justify-between text-xs">
                   <span className="text-soil/60">EVENT DATE:</span>
-                  <span className="text-soil/80 font-bold">28 Sept 2026 | PLH 101</span>
+                  <span className="text-soil/80 font-bold">
+                    28 Sept 2026 | PLH 101
+                  </span>
                 </div>
               </div>
 

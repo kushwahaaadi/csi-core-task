@@ -1,45 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import InteractiveSphere from './components/InteractiveSphere';
-import JoinModal from './components/JoinModal';
-import EventModal from './components/EventModal';
-import GalleryModal from './components/GalleryModal';
-import PRRegisterModal from './components/PRRegisterModal';
-import LeaderboardSection from './components/LeaderboardSection';
-import HypeEventBanner from './components/HypeEventBanner';
-import PRHero from './components/PRHero';
-import SupabaseConfigModal from './components/SupabaseConfigModal';
-import AdminInterviewerDashboard from './components/AdminInterviewerDashboard';
-import { Toaster, toast } from 'sonner';
-import Tilt from 'react-parallax-tilt';
-import { motion } from 'framer-motion';
-import { 
-  Menu, 
-  X, 
-  Sparkles, 
-  ExternalLink,
+import React, { useState, useEffect } from "react";
+import InteractiveSphere from "./components/InteractiveSphere";
+import GalleryModal from "./components/GalleryModal";
+import PRRegisterModal from "./components/PRRegisterModal";
+import LeaderboardSection from "./components/LeaderboardSection";
+import HypeEventBanner from "./components/HypeEventBanner";
+import PRHero from "./components/PRHero";
+import SupabaseConfigModal from "./components/SupabaseConfigModal";
+import AdminInterviewerDashboard from "./components/AdminInterviewerDashboard";
+import { Toaster, toast } from "sonner";
+import Tilt from "react-parallax-tilt";
+import { motion } from "framer-motion";
+import {
+  Menu,
+  X,
+  Sparkles,
   Crown,
   UserPlus,
   Sliders,
-  GitBranch
-} from 'lucide-react';
-import { formatEnrollment } from './lib/validation';
-import { EVENT_DETAILS } from './lib/supabase';
+  GitBranch,
+} from "lucide-react";
+import { formatEnrollment } from "./lib/validation";
+import { EVENT_DETAILS } from "./lib/supabase";
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [joinModalOpen, setJoinModalOpen] = useState(false);
-  const [eventModalOpen, setEventModalOpen] = useState(false);
   const [galleryModalOpen, setGalleryModalOpen] = useState(false);
   const [prRegisterModalOpen, setPrRegisterModalOpen] = useState(false);
   const [supabaseModalOpen, setSupabaseModalOpen] = useState(false);
   const [adminDashboardOpen, setAdminDashboardOpen] = useState(false);
 
   // Default active candidate referral key (defaults to user's S24CSEU1214)
-  const [activeJuniorEnrollment, setActiveJuniorEnrollment] = useState('S24CSEU1214');
+  const [activeJuniorEnrollment, setActiveJuniorEnrollment] =
+    useState("S24CSEU1214");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const refCode = params.get('ref');
+    const refCode = params.get("ref");
     if (refCode) {
       const formatted = formatEnrollment(refCode);
       setActiveJuniorEnrollment(formatted);
@@ -53,7 +49,10 @@ export default function App() {
 
   return (
     <div className="exported-root font-sans selection:bg-blush selection:text-soil">
-      <Toaster position="bottom-right" toastOptions={{ className: 'font-mono text-xs uppercase' }} />
+      <Toaster
+        position="bottom-right"
+        toastOptions={{ className: "font-mono text-xs uppercase" }}
+      />
       <div hidden></div>
       <main className="bg-cream text-soil">
         {/* ===================== HEADER ===================== */}
@@ -102,7 +101,7 @@ export default function App() {
                 >
                   The Chapter
                 </a>
-                </nav>
+              </nav>
 
               {/* Mobile Menu Toggle Button */}
               <button
@@ -125,8 +124,6 @@ export default function App() {
                 <Sliders size={12} />
                 Panel Dashboard
               </button>
-
-
 
               <button
                 onClick={() => setPrRegisterModalOpen(true)}
@@ -170,7 +167,6 @@ export default function App() {
                   <Sliders size={14} />
                   Senior Interviewer Panel
                 </button>
-
               </div>
             </div>
           )}
@@ -185,7 +181,7 @@ export default function App() {
           <div className="absolute inset-0 pointer-events-none">
             {/* Base dark background */}
             <div className="absolute inset-0 bg-[#0a0a0a]" />
-            
+
             {/* Grid lines */}
             <div
               className="absolute inset-0 opacity-[0.15]"
@@ -194,7 +190,7 @@ export default function App() {
                   linear-gradient(rgba(242,118,94,0.4) 1px, transparent 1px),
                   linear-gradient(90deg, rgba(242,118,94,0.4) 1px, transparent 1px)
                 `,
-                backgroundSize: '60px 60px',
+                backgroundSize: "60px 60px",
               }}
             />
 
@@ -206,7 +202,7 @@ export default function App() {
                   linear-gradient(rgba(242,118,94,0.6) 1px, transparent 1px),
                   linear-gradient(90deg, rgba(242,118,94,0.6) 1px, transparent 1px)
                 `,
-                backgroundSize: '15px 15px',
+                backgroundSize: "15px 15px",
               }}
             />
 
@@ -236,14 +232,18 @@ export default function App() {
               </span>
               <span className="block overflow-hidden mt-1 sm:mt-2">
                 <span className="block transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
-                  <span className="whitespace-nowrap text-cream">interview task</span>
+                  <span className="whitespace-nowrap text-cream">
+                    interview task
+                  </span>
                 </span>
               </span>
             </h1>
 
             <div className="transition-[opacity,transform] duration-500 delay-150">
               <p className="mt-6 max-w-[46ch] text-[0.95rem] sm:text-[1.05rem] font-normal leading-[1.6] text-cream/80 font-sans">
-                Convince Bennett students to attend <strong>HYPE 4.0</strong>, verify their registration, and earn your place in the CSI Bennett University Core Team.
+                Convince Bennett students to attend <strong>HYPE 4.0</strong>,
+                verify their registration, and earn your place in the CSI
+                Bennett University Core Team.
               </p>
             </div>
 
@@ -268,14 +268,18 @@ export default function App() {
 
             {/* Candidate Key Card */}
             <div className="mt-8 inline-flex items-center gap-2.5 rounded-xl bg-white/10 backdrop-blur-md px-4 py-2 text-xs font-mono border border-white/10 text-cream/90">
-              <span className="text-cream/50 uppercase">YOUR RECRUITMENT KEY:</span>
-              <span className="font-bold text-blush tracking-wider">{activeJuniorEnrollment}</span>
+              <span className="text-cream/50 uppercase">
+                YOUR RECRUITMENT KEY:
+              </span>
+              <span className="font-bold text-blush tracking-wider">
+                {activeJuniorEnrollment}
+              </span>
               <span className="text-cream/30">|</span>
               <button
                 onClick={() => {
                   const url = `${window.location.origin}/?ref=${activeJuniorEnrollment}`;
                   navigator.clipboard.writeText(url);
-                  toast.success('Recruitment link copied to clipboard!');
+                  toast.success("Recruitment link copied to clipboard!");
                 }}
                 className="text-xs text-cream hover:text-blush underline ml-1"
               >
@@ -331,7 +335,7 @@ export default function App() {
         />
 
         {/* ===================== PR & OUTREACH MISSION BANNER ===================== */}
-        <PRHero 
+        <PRHero
           onOpenRegister={() => setPrRegisterModalOpen(true)}
           defaultEnrollment={activeJuniorEnrollment}
         />
@@ -374,16 +378,46 @@ export default function App() {
               className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10"
             >
               <p className="m-0 text-[0.95rem] leading-[1.75] text-soil/80 font-sans">
-                <strong>Computer Society of India (CSI), Bennett University</strong> is a student-driven technology community built to create a space where curiosity turns into skills, ideas turn into projects, and students turn into creators and leaders. The chapter brings together students from different technical backgrounds and gives them opportunities to learn beyond the classroom through hands-on experiences, collaborative projects, technical workshops, hackathons, competitions, speaker sessions, bootcamps, and campus-wide technology initiatives.
+                <strong>
+                  Computer Society of India (CSI), Bennett University
+                </strong>{" "}
+                is a student-driven technology community built to create a space
+                where curiosity turns into skills, ideas turn into projects, and
+                students turn into creators and leaders. The chapter brings
+                together students from different technical backgrounds and gives
+                them opportunities to learn beyond the classroom through
+                hands-on experiences, collaborative projects, technical
+                workshops, hackathons, competitions, speaker sessions,
+                bootcamps, and campus-wide technology initiatives.
               </p>
               <p className="m-0 text-[0.95rem] leading-[1.75] text-soil/80 font-sans">
-                Over the years, CSI Bennett has been at the centre of several student-led experiences, including <strong>Hackaccino</strong>, our flagship hackathon that brings together developers, designers, innovators, and problem-solvers to build, experiment, and compete. Alongside Hackaccino, the chapter continues to organise technical sessions, Git & GitHub bootcamps, coding and development activities, industry-focused interactions, and community initiatives that help students discover new technologies and connect with people who share the same curiosity to build.
+                Over the years, CSI Bennett has been at the centre of several
+                student-led experiences, including <strong>Hackaccino</strong>,
+                our flagship hackathon that brings together developers,
+                designers, innovators, and problem-solvers to build, experiment,
+                and compete. Alongside Hackaccino, the chapter continues to
+                organise technical sessions, Git & GitHub bootcamps, coding and
+                development activities, industry-focused interactions, and
+                community initiatives that help students discover new
+                technologies and connect with people who share the same
+                curiosity to build.
               </p>
               <p className="m-0 text-[0.95rem] leading-[1.75] text-soil/70 font-sans">
-                <strong>But CSI is not defined by events alone.</strong> It is the people behind them — the developers writing code, the designers shaping experiences, the teams managing operations, the PR and outreach members bringing students together, and the leaders who turn an idea into something the entire campus can experience. We believe technology becomes more meaningful when people build it together.
+                <strong>But CSI is not defined by events alone.</strong> It is
+                the people behind them — the developers writing code, the
+                designers shaping experiences, the teams managing operations,
+                the PR and outreach members bringing students together, and the
+                leaders who turn an idea into something the entire campus can
+                experience. We believe technology becomes more meaningful when
+                people build it together.
               </p>
               <p className="m-0 text-[0.95rem] leading-[1.75] text-soil/70 font-sans">
-                From the first idea to the final execution, CSI Bennett exists to learn, build, connect, and lead — while creating a stronger and more active technology culture across Bennett University. <span className="text-blush font-black text-xl sm:text-2xl tracking-wide font-display uppercase">HAIL CSI!</span>
+                From the first idea to the final execution, CSI Bennett exists
+                to learn, build, connect, and lead — while creating a stronger
+                and more active technology culture across Bennett University.{" "}
+                <span className="text-blush font-black text-xl sm:text-2xl tracking-wide font-display uppercase">
+                  HAIL CSI!
+                </span>
               </p>
             </motion.div>
           </div>
@@ -394,8 +428,14 @@ export default function App() {
           <div className="mx-auto w-full max-w-[1040px] px-5 sm:px-6 py-8 sm:py-10 md:py-12">
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {/* Card 01 */}
-              <Tilt tiltMaxAngleX={4} tiltMaxAngleY={4} scale={1.02} transitionSpeed={2000} className="h-full">
-                <motion.article 
+              <Tilt
+                tiltMaxAngleX={4}
+                tiltMaxAngleY={4}
+                scale={1.02}
+                transitionSpeed={2000}
+                className="h-full"
+              >
+                <motion.article
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
@@ -407,22 +447,36 @@ export default function App() {
                       <span className="rounded-full bg-soil px-2 py-0.5 text-[0.62rem] font-mono uppercase tracking-[0.08em] text-cream">
                         01
                       </span>
-                      <span className="text-[0.68rem] font-mono text-soil/40 uppercase">WHAT WE LOOK FOR</span>
+                      <span className="text-[0.68rem] font-mono text-soil/40 uppercase">
+                        WHAT WE LOOK FOR
+                      </span>
                     </div>
                     <div className="mt-4">
-                      <p className="font-display text-[2.2rem] font-bold leading-none">01</p>
-                      <p className="mt-2 font-display text-[1.25rem] font-bold uppercase">Outreach Grit</p>
+                      <p className="font-display text-[2.2rem] font-bold leading-none">
+                        01
+                      </p>
+                      <p className="mt-2 font-display text-[1.25rem] font-bold uppercase">
+                        Outreach Grit
+                      </p>
                     </div>
                     <p className="mt-4 rounded-xl bg-cream px-3.5 py-3 text-[0.82rem] leading-[1.55] text-soil/75 font-sans">
-                      Can you make people care? We look at how effectively you reach students, communicate the opportunity, and turn conversations into registrations.
+                      Can you make people care? We look at how effectively you
+                      reach students, communicate the opportunity, and turn
+                      conversations into registrations.
                     </p>
                   </div>
                 </motion.article>
               </Tilt>
 
               {/* Card 02 */}
-              <Tilt tiltMaxAngleX={4} tiltMaxAngleY={4} scale={1.02} transitionSpeed={2000} className="h-full">
-                <motion.article 
+              <Tilt
+                tiltMaxAngleX={4}
+                tiltMaxAngleY={4}
+                scale={1.02}
+                transitionSpeed={2000}
+                className="h-full"
+              >
+                <motion.article
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
@@ -434,22 +488,36 @@ export default function App() {
                       <span className="rounded-full bg-soil px-2 py-0.5 text-[0.62rem] font-mono uppercase tracking-[0.08em] text-cream">
                         02
                       </span>
-                      <span className="text-[0.68rem] font-mono text-soil/40 uppercase">WHAT WE LOOK FOR</span>
+                      <span className="text-[0.68rem] font-mono text-soil/40 uppercase">
+                        WHAT WE LOOK FOR
+                      </span>
                     </div>
                     <div className="mt-4">
-                      <p className="font-display text-[2.2rem] font-bold leading-none">02</p>
-                      <p className="mt-2 font-display text-[1.25rem] font-bold uppercase">Execution Over Talk</p>
+                      <p className="font-display text-[2.2rem] font-bold leading-none">
+                        02
+                      </p>
+                      <p className="mt-2 font-display text-[1.25rem] font-bold uppercase">
+                        Execution Over Talk
+                      </p>
                     </div>
                     <p className="mt-4 rounded-xl bg-cream px-3.5 py-3 text-[0.82rem] leading-[1.55] text-soil/75 font-sans">
-                      Ideas are easy. Execution isn't. Your referral activity gives us a real view of how you plan, communicate, follow up, and deliver.
+                      Ideas are easy. Execution isn't. Your referral activity
+                      gives us a real view of how you plan, communicate, follow
+                      up, and deliver.
                     </p>
                   </div>
                 </motion.article>
               </Tilt>
 
               {/* Card 03 */}
-              <Tilt tiltMaxAngleX={4} tiltMaxAngleY={4} scale={1.02} transitionSpeed={2000} className="h-full">
-                <motion.article 
+              <Tilt
+                tiltMaxAngleX={4}
+                tiltMaxAngleY={4}
+                scale={1.02}
+                transitionSpeed={2000}
+                className="h-full"
+              >
+                <motion.article
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
@@ -461,14 +529,22 @@ export default function App() {
                       <span className="rounded-full bg-soil px-2 py-0.5 text-[0.62rem] font-mono uppercase tracking-[0.08em] text-cream">
                         03
                       </span>
-                      <span className="text-[0.68rem] font-mono text-soil/40 uppercase">WHAT WE LOOK FOR</span>
+                      <span className="text-[0.68rem] font-mono text-soil/40 uppercase">
+                        WHAT WE LOOK FOR
+                      </span>
                     </div>
                     <div className="mt-4">
-                      <p className="font-display text-[2.2rem] font-bold leading-none">03</p>
-                      <p className="mt-2 font-display text-[1.25rem] font-bold uppercase">Culture & Teamwork</p>
+                      <p className="font-display text-[2.2rem] font-bold leading-none">
+                        03
+                      </p>
+                      <p className="mt-2 font-display text-[1.25rem] font-bold uppercase">
+                        Culture & Teamwork
+                      </p>
                     </div>
                     <p className="mt-4 rounded-xl bg-cream px-3.5 py-3 text-[0.82rem] leading-[1.55] text-soil/75 font-sans">
-                      No one builds a campus movement alone. Work with tech teams, designers, management, and fellow PR members to turn HYPE 4.0 into a campus-wide experience.
+                      No one builds a campus movement alone. Work with tech
+                      teams, designers, management, and fellow PR members to
+                      turn HYPE 4.0 into a campus-wide experience.
                     </p>
                   </div>
                 </motion.article>
@@ -478,14 +554,19 @@ export default function App() {
         </div>
 
         {/* ===================== INTERACTIVE 3D SPHERE ARCHIVE ===================== */}
-        <section id="community" className="relative overflow-x-clip bg-cream py-12 sm:py-16">
+        <section
+          id="community"
+          className="relative overflow-x-clip bg-cream py-12 sm:py-16"
+        >
           <div
             className="relative min-h-[620px] w-full cursor-pointer md:min-h-[820px]"
             role="region"
             aria-label="3D Interactive Event and Project Sphere"
           >
             <div className="pointer-events-auto absolute inset-0 z-0 flex items-center justify-center">
-              <InteractiveSphere onSelectNode={() => setGalleryModalOpen(true)} />
+              <InteractiveSphere
+                onSelectNode={() => setGalleryModalOpen(true)}
+              />
             </div>
 
             <div className="pointer-events-none relative z-10 mx-auto flex flex-col justify-between min-h-[620px] max-w-[1240px] px-5 py-16 sm:px-8 md:min-h-[820px] md:px-10 md:py-24">
@@ -506,7 +587,8 @@ export default function App() {
                   </span>
                 </h2>
                 <p className="mt-4 text-[0.75rem] sm:text-sm font-sans text-soil/70 max-w-[28ch] ml-auto uppercase tracking-wide leading-relaxed">
-                  People, ideas, events and execution — all moving in the same direction.
+                  People, ideas, events and execution — all moving in the same
+                  direction.
                 </p>
               </div>
             </div>
@@ -526,7 +608,9 @@ export default function App() {
               READY TO MAKE NOISE?
             </h2>
             <p className="mt-6 text-lg sm:text-xl font-medium font-sans max-w-[40ch] mx-auto opacity-90">
-              Don't just join the chapter.<br/>Help move it forward.
+              Don't just join the chapter.
+              <br />
+              Help move it forward.
             </p>
             <button
               onClick={() => setPrRegisterModalOpen(true)}
@@ -566,22 +650,28 @@ export default function App() {
             </a>
 
             <p className="mt-4 m-0 max-w-[42ch] text-[0.92rem] leading-[1.6] text-cream/70 font-sans">
-              Built by Bennett University students who got tired of waiting for someone else to build it.
+              Built by Bennett University students who got tired of waiting for
+              someone else to build it.
             </p>
 
             <div className="mt-12 grid grid-cols-1 gap-8 border-t border-cream/15 pt-8 text-[0.88rem] sm:grid-cols-3">
               <div>
                 <p className="m-0 max-w-[34ch] text-cream/70 font-sans text-xs leading-relaxed">
-                  Humans building with machines. Bennett University, Plot Nos 8-11, TechZone II, Greater Noida, Uttar Pradesh 201310.
+                  Humans building with machines. Bennett University, Plot Nos
+                  8-11, TechZone II, Greater Noida, Uttar Pradesh 201310.
                 </p>
                 <div className="mt-3 flex items-center gap-2">
                   <span className="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
-                  <span className="font-mono text-[0.7rem] text-cream/50">HYPE 4.0 Drive Active</span>
+                  <span className="font-mono text-[0.7rem] text-cream/50">
+                    HYPE 4.0 Drive Active
+                  </span>
                 </div>
               </div>
 
               <div className="flex flex-col gap-2 font-sans text-xs">
-                <span className="font-mono uppercase text-cream/40 text-[0.7rem] tracking-wider mb-1">INTERVIEW SHORTCUTS</span>
+                <span className="font-mono uppercase text-cream/40 text-[0.7rem] tracking-wider mb-1">
+                  INTERVIEW SHORTCUTS
+                </span>
                 <button
                   onClick={() => setAdminDashboardOpen(true)}
                   className="text-left transition-colors hover:text-blush"
@@ -599,7 +689,9 @@ export default function App() {
               </div>
 
               <div className="flex flex-col gap-2 sm:items-end font-sans text-xs">
-                <span className="font-mono uppercase text-cream/40 text-[0.7rem] tracking-wider mb-1">CLOUD DATABASE</span>
+                <span className="font-mono uppercase text-cream/40 text-[0.7rem] tracking-wider mb-1">
+                  CLOUD DATABASE
+                </span>
                 <button
                   onClick={() => setSupabaseModalOpen(true)}
                   className="transition-colors hover:text-emerald-400 text-left sm:text-right"
@@ -636,16 +728,10 @@ export default function App() {
         onClose={() => setSupabaseModalOpen(false)}
       />
 
-      <JoinModal isOpen={joinModalOpen} onClose={() => setJoinModalOpen(false)} />
-      <EventModal
-        isOpen={eventModalOpen}
-        onClose={() => setEventModalOpen(false)}
-        onOpenJoin={() => {
-          setEventModalOpen(false);
-          setPrRegisterModalOpen(true);
-        }}
+      <GalleryModal
+        isOpen={galleryModalOpen}
+        onClose={() => setGalleryModalOpen(false)}
       />
-      <GalleryModal isOpen={galleryModalOpen} onClose={() => setGalleryModalOpen(false)} />
       {/* Floating Mobile CTA */}
       <button
         onClick={() => setPrRegisterModalOpen(true)}
