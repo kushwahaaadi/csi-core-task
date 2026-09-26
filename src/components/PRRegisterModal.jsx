@@ -235,7 +235,7 @@ export default function PRRegisterModal({
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-[0.72rem] font-semibold uppercase tracking-wider text-soil/70 mb-1">
                       Your Full Name *
@@ -248,6 +248,37 @@ export default function PRRegisterModal({
                       onChange={(e) => setJuniorName(e.target.value)}
                       className="w-full rounded-xl border border-soil/20 bg-cream/50 px-3.5 py-2 text-sm text-soil focus:border-blush focus:outline-none focus:ring-2 focus:ring-blush/20"
                     />
+                  </div>
+                  <div>
+                    <label className="block text-[0.72rem] font-semibold uppercase tracking-wider text-soil/70 mb-1">
+                      Your Bennett Enrollment No. *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="e.g. E24CSEU0123"
+                      value={juniorEnrollment}
+                      onChange={(e) =>
+                        setJuniorEnrollment(e.target.value.toUpperCase())
+                      }
+                      className={`w-full rounded-xl border px-3.5 py-2 text-sm font-mono tracking-wider focus:outline-none focus:ring-2 transition-all ${
+                        juniorVal.isValid
+                          ? "border-emerald-500 bg-emerald-50/50 text-emerald-900 font-bold"
+                          : "border-soil/20 bg-cream/50 focus:border-blush focus:ring-blush/20"
+                      }`}
+                    />
+                    <div className="mt-1 flex items-center justify-between text-[0.65rem] font-mono">
+                      <span
+                        className={
+                          juniorVal.isValid
+                            ? "text-emerald-600 font-semibold"
+                            : "text-soil/50"
+                        }
+                      >
+                        {juniorVal.message ||
+                          "This is the key to track your referrals"}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
