@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import InteractiveSphere from "./components/InteractiveSphere";
+import ConnectedNetwork from "./components/ConnectedNetwork";
 import GalleryModal from "./components/GalleryModal";
 import PRRegisterModal from "./components/PRRegisterModal";
 import LeaderboardSection from "./components/LeaderboardSection";
@@ -564,10 +564,8 @@ export default function App() {
             role="region"
             aria-label="3D Interactive Event and Project Sphere"
           >
-            <div className="pointer-events-auto absolute inset-0 z-0 flex items-center justify-center">
-              <InteractiveSphere
-                onSelectNode={() => setGalleryModalOpen(true)}
-              />
+            <div className="absolute inset-0 z-0 flex items-center justify-center">
+              <ConnectedNetwork />
             </div>
 
             <div className="pointer-events-none relative z-10 mx-auto flex flex-col justify-between min-h-[620px] max-w-[1240px] px-5 py-16 sm:px-8 md:min-h-[820px] md:px-10 md:py-24">
@@ -733,15 +731,7 @@ export default function App() {
         isOpen={galleryModalOpen}
         onClose={() => setGalleryModalOpen(false)}
       />
-      {/* Floating Mobile CTA */}
-      <button
-        onClick={() => setPrRegisterModalOpen(true)}
-        className="fixed bottom-5 right-5 z-50 md:hidden flex items-center gap-2 rounded-full bg-blush px-5 py-3 text-sm font-bold uppercase tracking-wider text-soil shadow-2xl shadow-blush/30 hover:bg-white active:scale-95 transition-all animate-[fadeIn_0.5s_ease-out]"
-        aria-label="Verify Attendee"
-      >
-        <Sparkles size={16} />
-        Verify
-      </button>
+
     </div>
   );
 }
