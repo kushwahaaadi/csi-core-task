@@ -1,0 +1,94 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    background-color: #201915;
+    color: #f7f4ed;
+    overflow-x: hidden;
+    animation: pageLoad 0.5s ease-out;
+  }
+
+  ::selection {
+    background-color: #f2765e;
+    color: #201915;
+  }
+}
+
+.exported-root {
+  line-height: 24px;
+  tab-size: 4;
+  -webkit-text-size-adjust: 100%;
+}
+
+[hidden]:where(:not([hidden="until-found"])) {
+  display: none !important;
+}
+
+/* Infinite Marquee */
+.nt-marquee-track {
+  will-change: transform;
+  width: max-content;
+  display: flex;
+  animation: marquee 32s linear infinite;
+}
+
+.nt-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee { 
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse { 
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes pageLoad {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #201915;
+}
+::-webkit-scrollbar-thumb {
+  background: #3b2c25;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f2765e;
+}

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <defs>
+    <linearGradient id="text-accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f2765e" />
+      <stop offset="100%" stop-color="#e8c9a8" />
+    </linearGradient>
+  </defs>
+  <!-- CSI Emblem small -->
+  <g transform="translate(10, 16)">
+    <circle cx="24" cy="24" r="22" fill="#201915" stroke="#f2765e" stroke-width="2"/>
+    <circle cx="24" cy="24" r="26" stroke="#f7f4ed" stroke-width="1" stroke-dasharray="4 3" opacity="0.4"/>
+    <path d="M16 19 C16 15 20 13 24 13 C28 13 32 15 32 19 C32 23 28 24 24 25 C19 26 15 28 15 32 C15 37 19 39 24 39 C29 39 33 36 33 32" stroke="url(#text-accent)" stroke-width="2.8" stroke-linecap="round"/>
+    <circle cx="24" cy="24" r="2.5" fill="#f7f4ed"/>
+  </g>
+  
+  <!-- Text CSI BENNETT -->
+  <text x="70" y="38" font-family="'Syne', 'Plus Jakarta Sans', sans-serif" font-size="28" font-weight="800" fill="#f7f4ed" letter-spacing="0.05em">CSI BENNETT</text>
+  <text x="71" y="55" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="500" fill="#f2765e" letter-spacing="0.22em">COMPUTER SOCIETY OF INDIA</text>
+</svg>
